@@ -24,6 +24,11 @@ class App extends React.Component {
           <DisplayNumber currentValue={this.state.count}></DisplayNumber>
         </div>
         <div className="ui grid equal  increment-decrement-button-holder-div">
+          <h2 className="ui center aligned icon header">
+            <i className="circular users icon"></i>
+            Friends
+          </h2>
+
           <div className="equal width row">
             <div className="increment column">
               <button
