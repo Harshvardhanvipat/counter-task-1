@@ -1,8 +1,6 @@
 import React from "react";
 import DisplayNumber from "../src/components/DisplayNumberComponent";
-import IncrementComponent from "../src/components/IncrementComponent";
-import DecrementComponent from "../src/components/DecrementComponent";
-import { useState } from "react";
+// import { useState } from "react";
 
 import "./App.css";
 
