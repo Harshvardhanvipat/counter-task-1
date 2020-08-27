@@ -6,18 +6,36 @@ import { useState } from "react";
 
 import "./App.css";
 
-function App() {
-  const [value, setValue] = useState(0);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
 
-  return (
-    <div className="App">
+  render() {
+    const ICREMENT_SYMBOL = "+";
+    const DECREMENT_SYMBOL = "-";
+
+    return (
       <div>
-        <DisplayNumber currentValue={value}></DisplayNumber>
-        <IncrementComponent></IncrementComponent>
-        <DecrementComponent></DecrementComponent>
+        <div>
+          <DisplayNumber currentValue={this.state.count}></DisplayNumber>
+        </div>
+        <div className="ui grid equal  increment-decrement-button-holder-div">
+          <div className="equal width row">
+            <div className="increment column">
+              <button>{ICREMENT_SYMBOL}</button>
+            </div>
+            <div className="decrement column">
+              <button>{DECREMENT_SYMBOL}</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
