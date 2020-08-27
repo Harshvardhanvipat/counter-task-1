@@ -1,33 +1,74 @@
 import React from "react";
-// import DisplayNumber from "../src/components/DisplayNumberComponent";
-import IncrementDecrementComponent from "../src/components/IncrementDecrementComponent";
+import { useState } from "react";
+import DisplayNumber from "../src/components/DisplayNumberComponent";
+import AutomaticDisplayComponent from "../src/components/AutomaticDisplayComponent";
+// import IncrementDecrementComponent from "../src/components/IncrementDecrementComponent";
 // import { useState } from "react";
 //https:elated-fermi-52a102.netlify.app/
 
 import "./App.css";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0,
-      manualActive: true,
-    };
-  }
+function App() {
+  const [count, setCount] = useState(0);
+  const [manualActive, changedManualActive] = useState(true);
+  const [direction, setDirection] = useState("increment");
 
-  increment() {
-    setState({ count: count + 1 });
-  }
+  const ICREMENT_SYMBOL = "+";
+  const DECREMENT_SYMBOL = "-";
 
-  render() {
-    return (
-      <IncrementDecrementComponent
-        currentValue={this.state.count}
-        manualActive={this.state.manualActive}
-        incrementHandler={this.increment}
+  return (
+    <div>
+      <div className="displayNumberDivHolder">
+        <DisplayNumber currentValue={count}></DisplayNumber>
+      </div>
+      <div className="ui grid equal  increment-decrement-button-holder-div">
+        <h2 className="ui center aligned icon header">
+          <i className="sign language icon"></i>
+          Manual
+        </h2>
+
+        <div className="equal width row">
+          <div className="increment column">
+            <button
+              onClick={() => setCount((count) => count + 1)}
+              className="ui secondary button"
+            >
+              {ICREMENT_SYMBOL}
+            </button>
+          </div>
+          <div className="decrement column">
+            <button
+              onClick={() =>
+                manualActive && count === 0
+                  ? undefined
+                  : setCount((count) => count - 1)
+              }
+              className="ui secondary button"
+            >
+              {DECREMENT_SYMBOL}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <AutomaticDisplayComponent
+        currentManualActiveValue={manualActive}
+        toggleFunctionality={() => {
+          changedManualActive((m) => !m);
+        }}
+        direction={direction}
+        toggleDirection={() => {
+          setDirection(function (dir) {
+            if (dir === "increment") {
+              return "decrement";
+            } else {
+              return "increment";
+            }
+          });
+        }}
       />
-    );
-  }
+    </div>
+  );
 }
 
 export default App;

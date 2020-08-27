@@ -4,6 +4,9 @@
 
 .increment-decrement-button-holder-div {
   text-align: center;
+  padding-top: 50px !important;
+  padding-bottom: 50px !important;
+  border: 5px groove rgba(25, 29, 76, 0.78);
 }
 
 .displayNumberDivHolder {
