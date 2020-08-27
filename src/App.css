@@ -4,5 +4,8 @@
 
 .increment-decrement-button-holder-div {
   text-align: center;
-  margin-top: 20px;
+}
+
+.displayNumberDivHolder {
+  margin-bottom: 20px;
 }

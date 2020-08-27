@@ -20,16 +20,26 @@ class App extends React.Component {
 
     return (
       <div>
-        <div>
+        <div className="displayNumberDivHolder">
           <DisplayNumber currentValue={this.state.count}></DisplayNumber>
         </div>
         <div className="ui grid equal  increment-decrement-button-holder-div">
           <div className="equal width row">
             <div className="increment column">
-              <button>{ICREMENT_SYMBOL}</button>
+              <button
+                onClick={() => this.setState({ count: this.state.count + 1 })}
+                className="ui secondary button"
+              >
+                {ICREMENT_SYMBOL}
+              </button>
             </div>
             <div className="decrement column">
-              <button>{DECREMENT_SYMBOL}</button>
+              <button
+                onClick={() => this.setState({ count: this.state.count - 1 })}
+                className="ui button"
+              >
+                {DECREMENT_SYMBOL}
+              </button>
             </div>
           </div>
         </div>
