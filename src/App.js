@@ -1,11 +1,21 @@
 import React from "react";
-// import logo from './logo.svg';
+import DisplayNumber from "../src/components/DisplayNumberComponent";
+import IncrementComponent from "../src/components/IncrementComponent";
+import DecrementComponent from "../src/components/DecrementComponent";
+import { useState } from "react";
+
 import "./App.css";
 
 function App() {
+  const [value, setValue] = useState(0);
+
   return (
     <div className="App">
-      <div>this is a test div</div>
+      <div>
+        <DisplayNumber currentValue={value}></DisplayNumber>
+        <IncrementComponent></IncrementComponent>
+        <DecrementComponent></DecrementComponent>
+      </div>
     </div>
   );
 }
