@@ -57,15 +57,7 @@ function App() {
           changedManualActive((m) => !m);
         }}
         direction={direction}
-        toggleDirection={() => {
-          setDirection(function (dir) {
-            if (dir === "increment") {
-              return "decrement";
-            } else {
-              return "increment";
-            }
-          });
-        }}
+        setDirection={setDirection}
       />
     </div>
   );

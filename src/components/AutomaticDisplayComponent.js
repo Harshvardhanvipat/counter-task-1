@@ -12,7 +12,7 @@ function AutomaticDisplayComponent({
   currentManualActiveValue,
   toggleFunctionality,
   direction,
-  toggleDirection,
+  setDirection,
 }) {
   return (
     <div className="container ui">
@@ -29,13 +29,13 @@ function AutomaticDisplayComponent({
       </div>
 
       <div className="left-arrow">
-        <button onClick={toggleDirection}>
+        <button onClick={() => setDirection("decremnt")}>
           <i className="angle left icon"></i>
         </button>
       </div>
       {direction}
       <div className="right-arrow">
-        <button onClick={toggleDirection}>
+        <button onClick={() => setDirection("increment")}>
           <i className="angle right icon"></i>
         </button>
       </div>
