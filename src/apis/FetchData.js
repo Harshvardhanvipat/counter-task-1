@@ -4,22 +4,24 @@ import axios from "axios";
 export default function FetchData(props) {
   const [dataFetched, setDataFetched] = useState([]);
   //   console.log(props);
-  const URL = "http://numbersapi.com/1000/math";
+  const test = props.displayNumberDetails;
+  const URL = "http://numbersapi.com/" + test + "/math";
   // we need to fetch the data from the API
   useEffect(() => {
     const fetchedData = async () => {
-      //   const currentNumber = props.displayNumberDetails;
       const result = await axios(URL);
-      //   console.log(result);
-      setDataFetched(result.data);
-      console.log(dataFetched);
+      setDataFetched(dataFetched.concat(result.data));
     };
     fetchedData();
-  }, [props.displayNumberDetails, dataFetched]);
+  }, [props.displayNumberDetails]);
 
   return (
     <div>
-      <ul>test</ul>
+      <ul>
+        {dataFetched.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
