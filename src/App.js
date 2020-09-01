@@ -3,9 +3,6 @@ import { useState } from "react";
 import DisplayNumber from "../src/components/DisplayNumberComponent";
 import AutomaticDisplayComponent from "../src/components/AutomaticDisplayComponent";
 import FetchData from "../src/apis/FetchData";
-// import IncrementDecrementComponent from "../src/components/IncrementDecrementComponent";
-// import { useState } from "react";
-//https:elated-fermi-52a102.netlify.app/
 
 import "./App.css";
 
@@ -16,6 +13,8 @@ function App() {
 
   const ICREMENT_SYMBOL = "+";
   const DECREMENT_SYMBOL = "-";
+
+  function handleAutomaticFunctionality() {}
 
   return (
     <div>
@@ -51,7 +50,10 @@ function App() {
           </div>
         </div>
       </div>
+
       <AutomaticDisplayComponent
+        currentCount={count}
+        setCount={setCount}
         currentManualActiveValue={manualActive}
         toggleFunctionality={() => {
           changedManualActive((m) => !m);
@@ -60,6 +62,7 @@ function App() {
         setDirection={setDirection}
       />
       <FetchData displayNumberDetails={count} />
+      {direction}
     </div>
   );
 }

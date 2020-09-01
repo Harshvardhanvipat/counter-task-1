@@ -9,6 +9,8 @@ const secondOptions = [
 ];
 
 function AutomaticDisplayComponent({
+  currentCount,
+  setCount,
   currentManualActiveValue,
   toggleFunctionality,
   direction,
@@ -24,24 +26,52 @@ function AutomaticDisplayComponent({
       </div>
 
       <div>
-        <button onClick={toggleFunctionality}>Pause / Play</button>
+        <div className="ui divided three column grid">
+          <div className="row">
+            <div className="column">
+              <button
+                onClick={
+                  direction === "increment"
+                    ? () => {
+                        return setCount(currentCount + 1);
+                      }
+                    : () => {
+                        return setCount(currentCount - 1);
+                      }
+                } /* onClick={toggleFunctionality} */
+              >
+                Pause / Play
+              </button>
+            </div>
+            <div className="column">
+              <div>
+                <div className="left-arrow">
+                  <button onClick={() => setDirection("decrement")}>
+                    <i className="angle left icon"></i>
+                  </button>
+                </div>
+              </div>
+
+              {direction}
+              <div>
+                <div className="right-arrow">
+                  <button onClick={() => setDirection("increment")}>
+                    <i className="angle right icon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="column">
+              <div className="seconds-dropdown">
+                <Dropdown options={secondOptions} clearable selection />
+                {}
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* {console.log(currentManualActiveValue)} */}
-      </div>
-
-      <div className="left-arrow">
-        <button onClick={() => setDirection("decrement")}>
-          <i className="angle left icon"></i>
-        </button>
-      </div>
-      {direction}
-      <div className="right-arrow">
-        <button onClick={() => setDirection("increment")}>
-          <i className="angle right icon"></i>
-        </button>
-      </div>
-
-      <div className="seconds-dropdown">
-        <Dropdown options={secondOptions} clearable selection />
       </div>
     </div>
   );

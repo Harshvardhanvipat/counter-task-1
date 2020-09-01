@@ -6,12 +6,11 @@ export default function FetchData(props) {
   const [individualNumberDetail, setIndividualNumberDetail] = useState("");
   const number = props.displayNumberDetails;
   const URL = `http://numbersapi.com/${number}/math`;
-  // we need to fetch the data from the API
+
   useEffect(() => {
     const fetchedData = async () => {
       const result = await axios(URL);
       setDataFetched((storedDetailArray) => {
-        // console.log(result.data);
         return storedDetailArray.concat(result.data);
       });
       setIndividualNumberDetail((storeIndividualNumber) => {
@@ -20,7 +19,7 @@ export default function FetchData(props) {
       console.log(individualNumberDetail);
     };
     fetchedData();
-  }, [props.displayNumberDetails, individualNumberDetail, URL]);
+  }, [props.displayNumberDetails]);
 
   return (
     <div className="ui container">
@@ -48,10 +47,6 @@ export default function FetchData(props) {
               {item}
             </div>
           ))}
-
-          {/* {dataFetched.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))} */}
         </ul>
       </div>
     </div>
