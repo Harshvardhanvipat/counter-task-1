@@ -14,8 +14,6 @@ function App() {
   const ICREMENT_SYMBOL = "+";
   const DECREMENT_SYMBOL = "-";
 
-  function handleAutomaticFunctionality() {}
-
   return (
     <div>
       <div className="displayNumberDivHolder">

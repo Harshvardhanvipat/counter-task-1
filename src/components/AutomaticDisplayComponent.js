@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "semantic-ui-react";
 import "../css/AutomaticDisplayComponent.css";
 
@@ -16,6 +16,34 @@ function AutomaticDisplayComponent({
   direction,
   setDirection,
 }) {
+  const [play, setPlay] = useState("pause");
+
+  function incrementTheValue(value = 1000, currentCount, setCount) {
+    setInterval(() => {
+      return setCount(currentCount + 1);
+    }, value);
+  }
+
+  function decrementTheValue(value = 1000, currentCount, setCount) {
+    setInterval(() => {
+      return setCount(currentCount - 1);
+    }, value);
+  }
+
+  function checkPlayPauseStatus(playPause) {
+    if (playPause === "play") {
+      if (direction === "increment") {
+        return incrementTheValue(1000, currentCount, setCount);
+      } else {
+        return decrementTheValue(1000, currentCount, setCount);
+      }
+    }
+  }
+
+  useEffect(() => {
+    checkPlayPauseStatus(play);
+  }, []);
+
   return (
     <div className="container ui">
       <div>
@@ -31,14 +59,10 @@ function AutomaticDisplayComponent({
             <div className="column">
               <button
                 onClick={
-                  direction === "increment"
-                    ? () => {
-                        return setCount(currentCount + 1);
-                      }
-                    : () => {
-                        return setCount(currentCount - 1);
-                      }
-                } /* onClick={toggleFunctionality} */
+                  (toggleFunctionality = () => {
+                    setPlay((m) => !m);
+                  })
+                }
               >
                 Pause / Play
               </button>
