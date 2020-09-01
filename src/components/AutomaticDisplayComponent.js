@@ -29,7 +29,7 @@ function AutomaticDisplayComponent({
       </div>
 
       <div className="left-arrow">
-        <button onClick={() => setDirection("decremnt")}>
+        <button onClick={() => setDirection("decrement")}>
           <i className="angle left icon"></i>
         </button>
       </div>

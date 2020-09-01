@@ -51,7 +51,6 @@ function App() {
           </div>
         </div>
       </div>
-
       <AutomaticDisplayComponent
         currentManualActiveValue={manualActive}
         toggleFunctionality={() => {
@@ -60,7 +59,6 @@ function App() {
         direction={direction}
         setDirection={setDirection}
       />
-
       <FetchData displayNumberDetails={count} />
     </div>
   );
