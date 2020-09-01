@@ -20,7 +20,7 @@ export default function FetchData(props) {
       console.log(individualNumberDetail);
     };
     fetchedData();
-  }, [props.displayNumberDetails]);
+  }, [props.displayNumberDetails, individualNumberDetail, URL]);
 
   return (
     <div className="ui container">
