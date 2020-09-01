@@ -8,40 +8,41 @@ const secondOptions = [
   { key: 3, text: "3 second", value: 3 },
 ];
 
+function incrementTheValue(value = 1000, currentCount, setCount) {
+  setTimeout(() => {
+    return setCount(currentCount + 1);
+  }, value);
+}
+
+function decrementTheValue(value = 1000, currentCount, setCount) {
+  setTimeout(() => {
+    return setCount(currentCount - 1);
+  }, value);
+}
+
+function checkPlayPauseStatus() {}
+
 function AutomaticDisplayComponent({
   currentCount,
   setCount,
   currentManualActiveValue,
-  toggleFunctionality,
+  togglefunctionality,
   direction,
   setDirection,
 }) {
   const [play, setPlay] = useState("pause");
 
-  function incrementTheValue(value = 1000, currentCount, setCount) {
-    setInterval(() => {
-      return setCount(currentCount + 1);
-    }, value);
-  }
-
-  function decrementTheValue(value = 1000, currentCount, setCount) {
-    setInterval(() => {
-      return setCount(currentCount - 1);
-    }, value);
-  }
-
-  function checkPlayPauseStatus(playPause) {
-    if (playPause === "play") {
-      if (direction === "increment") {
-        return incrementTheValue(1000, currentCount, setCount);
-      } else {
-        return decrementTheValue(1000, currentCount, setCount);
-      }
-    }
-  }
-
   useEffect(() => {
-    checkPlayPauseStatus(play);
+    let counter = currentCount;
+    const increaseCount = setInterval(() => {
+      // console.log(counter++);
+      setCount((counter) => counter);
+    }, 1000);
+
+    const timer = setInterval(() => {
+      // console.log("This will run after 1 second!");
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -58,11 +59,16 @@ function AutomaticDisplayComponent({
           <div className="row">
             <div className="column">
               <button
+                className="ui primary button"
                 onClick={
-                  (toggleFunctionality = () => {
-                    setPlay((m) => !m);
-                  })
-                }
+                  direction === "increment"
+                    ? () => {
+                        return incrementTheValue(1000, currentCount, setCount);
+                      }
+                    : () => {
+                        return decrementTheValue(1000, currentCount, setCount);
+                      }
+                } /* onClick={toggleFunctionality} */
               >
                 Pause / Play
               </button>
@@ -70,7 +76,10 @@ function AutomaticDisplayComponent({
             <div className="column">
               <div>
                 <div className="left-arrow">
-                  <button onClick={() => setDirection("decrement")}>
+                  <button
+                    className="ui olive inverted button"
+                    onClick={() => setDirection("decrement")}
+                  >
                     <i className="angle left icon"></i>
                   </button>
                 </div>
@@ -79,7 +88,10 @@ function AutomaticDisplayComponent({
               {direction}
               <div>
                 <div className="right-arrow">
-                  <button onClick={() => setDirection("increment")}>
+                  <button
+                    className="ui olive inverted button"
+                    onClick={() => setDirection("increment")}
+                  >
                     <i className="angle right icon"></i>
                   </button>
                 </div>
@@ -88,14 +100,19 @@ function AutomaticDisplayComponent({
 
             <div className="column">
               <div className="seconds-dropdown">
-                <Dropdown options={secondOptions} clearable selection />
+                <Dropdown
+                  id="test"
+                  options={secondOptions}
+                  clearable
+                  selection
+                />
                 {}
               </div>
             </div>
           </div>
         </div>
 
-        {/* {console.log(currentManualActiveValue)} */}
+        {console.log(currentManualActiveValue)}
       </div>
     </div>
   );

@@ -9,14 +9,29 @@ export default function FetchData(props) {
 
   useEffect(() => {
     const fetchedData = async () => {
-      const result = await axios(URL);
-      setDataFetched((storedDetailArray) => {
-        return storedDetailArray.concat(result.data);
-      });
-      setIndividualNumberDetail((storeIndividualNumber) => {
-        return (storeIndividualNumber = result.data);
-      });
-      console.log(individualNumberDetail);
+      const resp = await axios
+        .get(URL)
+        .then((resp) => {
+          setDataFetched((storedDetailArray) =>
+            storedDetailArray.concat(resp.data)
+          );
+          // why do we need a return here ??
+          setIndividualNumberDetail((storeIndividualNumber) => {
+            return (storeIndividualNumber = resp.data);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      // const result = await axios.get(URL);
+      // setDataFetched((storedDetailArray) => {
+      //   return storedDetailArray.concat(result.data);
+      // });
+      // setIndividualNumberDetail((storeIndividualNumber) => {
+      //   return (storeIndividualNumber = result.data);
+      // });
+      // console.log(individualNumberDetail);
     };
     fetchedData();
   }, [props.displayNumberDetails]);
@@ -25,12 +40,13 @@ export default function FetchData(props) {
     <div className="ui container">
       <div>
         <h2 className="ui center aligned icon header automatic-controls">
-          <i className="circular numbered list icon"></i>
+          <i className="circular icon">{props.displayNumberDetails}</i>
           Number Details
         </h2>
       </div>
-      <div className="meta">{props.displayNumberDetails}</div>
+      {/* <div className="meta">{props.displayNumberDetails}</div> */}
       <div className="ui raised segment">{individualNumberDetail}</div>
+      {/* {console.log(individualNumberDetail)} */}
       <div className="description"></div>
 
       {/* <div style={{ marginLeft: "20px" }}> {individualNumberDetail} </div> */}

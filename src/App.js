@@ -13,6 +13,7 @@ function App() {
 
   const ICREMENT_SYMBOL = "+";
   const DECREMENT_SYMBOL = "-";
+  let classButton = "ui secondary button";
 
   return (
     <div>
@@ -28,7 +29,11 @@ function App() {
         <div className="equal width row">
           <div className="increment column">
             <button
-              onClick={() => setCount((count) => count + 1)}
+              onClick={
+                manualActive === true
+                  ? () => setCount((count) => count + 1)
+                  : classButton + "disabled"
+              }
               className="ui secondary button"
             >
               {ICREMENT_SYMBOL}
@@ -53,12 +58,14 @@ function App() {
         currentCount={count}
         setCount={setCount}
         currentManualActiveValue={manualActive}
-        toggleFunctionality={() => {
+        togglefunctionality={() => {
           changedManualActive((m) => !m);
         }}
         direction={direction}
         setDirection={setDirection}
       />
+
+      <div>{console.log(manualActive)}</div>
       <FetchData displayNumberDetails={count} />
       {direction}
     </div>
