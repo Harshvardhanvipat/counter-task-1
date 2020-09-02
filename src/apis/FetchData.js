@@ -16,22 +16,10 @@ export default function FetchData(props) {
             storedDetailArray.concat(resp.data)
           );
           // why do we need a return here ??
-          setIndividualNumberDetail((storeIndividualNumber) => {
-            return (storeIndividualNumber = resp.data);
-          });
         })
         .catch((err) => {
           console.log(err);
         });
-
-      // const result = await axios.get(URL);
-      // setDataFetched((storedDetailArray) => {
-      //   return storedDetailArray.concat(result.data);
-      // });
-      // setIndividualNumberDetail((storeIndividualNumber) => {
-      //   return (storeIndividualNumber = result.data);
-      // });
-      // console.log(individualNumberDetail);
     };
     fetchedData();
   }, [props.displayNumberDetails]);
@@ -39,21 +27,13 @@ export default function FetchData(props) {
   return (
     <div className="ui container">
       <div>
-        {/* <h2 className="ui center aligned icon header automatic-controls">
-          <i className="circular icon">{props.displayNumberDetails}</i>
-          Number Details
-        </h2> */}
         <NumberComponent
           key={props.displayNumberDetails}
           number={props.displayNumberDetails}
         />
       </div>
-      {/* <div className="meta">{props.displayNumberDetails}</div> */}
-      {/* <div className="ui raised segment">{individualNumberDetail}</div> */}
-      {/* {console.log(individualNumberDetail)} */}
       <div className="description"></div>
 
-      {/* <div style={{ marginLeft: "20px" }}> {individualNumberDetail} </div> */}
       <div className="ui container">
         <div>
           <h2 className="ui center aligned icon header automatic-controls">
