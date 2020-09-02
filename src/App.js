@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import DisplayNumber from "../src/components/DisplayNumberComponent";
 import AutomaticDisplayComponent from "../src/components/AutomaticDisplayComponent";
+// import FormAutomaticRender from "../src/components/FormAutomaticRender";
 import FetchData from "../src/apis/FetchData";
 
 import "./App.css";
@@ -20,6 +21,7 @@ function App() {
       <div className="displayNumberDivHolder">
         <DisplayNumber currentValue={count}></DisplayNumber>
       </div>
+
       <div className="ui grid equal  increment-decrement-button-holder-div">
         <h2 className="ui center aligned icon header">
           <i className="sign language icon"></i>
@@ -67,7 +69,7 @@ function App() {
 
       <div>{console.log(manualActive)}</div>
       <FetchData displayNumberDetails={count} />
-      {direction}
+      {/* {direction} */}
     </div>
   );
 }

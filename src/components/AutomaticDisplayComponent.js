@@ -3,24 +3,25 @@ import { Dropdown } from "semantic-ui-react";
 import "../css/AutomaticDisplayComponent.css";
 
 const secondOptions = [
-  { key: 1, text: "1 second", value: 1 },
-  { key: 2, text: "2 second", value: 2 },
-  { key: 3, text: "3 second", value: 3 },
+  { key: 1, text: ".5 second", value: 500 },
+  { key: 2, text: "1 second", value: 1000 },
+  { key: 3, text: "2 second", value: 2000 },
+  { key: 4, text: "4 second", value: 4000 },
 ];
 
+// console.log(secondOptions.target.value);
+
 function incrementTheValue(value = 1000, currentCount, setCount) {
-  setTimeout(() => {
+  setInterval(() => {
     return setCount(currentCount + 1);
   }, value);
 }
 
 function decrementTheValue(value = 1000, currentCount, setCount) {
-  setTimeout(() => {
+  setInterval(() => {
     return setCount(currentCount - 1);
   }, value);
 }
-
-function checkPlayPauseStatus() {}
 
 function AutomaticDisplayComponent({
   currentCount,
@@ -30,17 +31,38 @@ function AutomaticDisplayComponent({
   direction,
   setDirection,
 }) {
-  const [play, setPlay] = useState("pause");
+  const [play, setPlay] = useState(true);
+
+  function togglePlay(play) {
+    if (play === true) {
+      setPlay(false);
+    } else {
+      setPlay(true);
+      if (direction === "increment") {
+        setInterval(() => {
+          setCount(currentCount + 1);
+        }, 1000);
+      } else {
+        setInterval(() => {
+          setCount(currentCount - 1);
+        }, 1000);
+      }
+    }
+  }
 
   useEffect(() => {
+    if (play === true) {
+      // setCount(currentCount + 1);
+      console.log(currentCount);
+    }
     let counter = currentCount;
     const increaseCount = setInterval(() => {
       // console.log(counter++);
-      setCount((counter) => counter);
+      setCount((counter) => counter + 1);
     }, 1000);
 
     const timer = setInterval(() => {
-      // console.log("This will run after 1 second!");
+      console.log("This will run after 1 second!");
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
@@ -63,7 +85,9 @@ function AutomaticDisplayComponent({
                 onClick={
                   direction === "increment"
                     ? () => {
-                        return incrementTheValue(1000, currentCount, setCount);
+                        setInterval(() => {
+                          setCount(currentCount + 1);
+                        }, 1000);
                       }
                     : () => {
                         return decrementTheValue(1000, currentCount, setCount);
