@@ -15,9 +15,10 @@ const fetchNumbers = async (key, numberDetails) => {
 };
 
 function ReactQueryComponent(props) {
-  const [maxTenNumberDetails, setMaxTenNumberDetails] = useState([]);
-  const { data, status } = useQuery(["numbers", props.number], fetchNumbers);
-  //   console.log(data);
+  const { data, status } = useQuery(["numbers", props.number], fetchNumbers, {
+    refetchOnMount: false,
+    staleTime: 10000,
+  });
 
   return (
     <div>

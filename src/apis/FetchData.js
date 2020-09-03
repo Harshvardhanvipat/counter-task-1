@@ -28,6 +28,7 @@ export default function FetchData(props) {
           key={props.displayNumberDetails}
           number={props.displayNumberDetails}
         />
+        {}
       </div>
       <div className="description"></div>
 
@@ -106,4 +107,6 @@ function NumberComponent(props) {
       </h2>
     </div>
   );
+}
+{
 }

@@ -48,6 +48,13 @@ function DisplayButtons(props) {
 function CounterDelaySimulator(props) {
   const [delay, setDelay] = useState(1000);
   const [counter, setCounter] = useState(0);
+  const [maxTenNumber, setMaxTenNumberDetails] = useState([]);
+
+  useEffect(() => {
+    let rest = maxTenNumber.slice(0, 9);
+    const newNumber = [counter, ...rest];
+    setMaxTenNumberDetails(newNumber);
+  }, [counter]);
 
   useInterval(() => {
     if (props.playPauseMode) {
@@ -64,6 +71,9 @@ function CounterDelaySimulator(props) {
   return (
     <div className="ui text container">
       {/* <DisplayNumber currentValue={counter} /> */}
+      {maxTenNumber.map((number) => {
+        return <ReactQueryComponent number={number} />;
+      })}
       <button
         className="ui button"
         onClick={() => {
