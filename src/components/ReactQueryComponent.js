@@ -16,32 +16,45 @@ const fetchNumbers = async (key, numberDetails) => {
 
 function ReactQueryComponent(props) {
   const [maxTenNumberDetails, setMaxTenNumberDetails] = useState([]);
-
-  const { data, status } = useQuery(["numbers", props.number], fetchNumbers, {
-    staleTime: 0,
-    // onSuccess: () => {
-    //   setMaxTenNumberDetails((storedDetailArray) =>
-    //     storedDetailArray.concat(data.text)
-    //   );
-    // },
-  });
-  console.log(data);
+  const { data, status } = useQuery(["numbers", props.number], fetchNumbers);
+  //   console.log(data);
 
   return (
     <div>
       <div>
-        {props.number}
+        {/* {props.number} */}
         {status === "error" && <div> Error fetching data </div>}
 
-        {status === "Loading" && <div> Loading data... </div>}
+        {status === "Loading" && (
+          <div>
+            <div className="ui segment">
+              <div className="ui active transition visible dimmer">
+                <div className="content">
+                  <div className="ui loader"></div>
+                </div>
+              </div>
+              <img
+                src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png"
+                class="ui image"
+              />
+            </div>
+          </div>
+        )}
 
         {status === "success" && (
           <div>
             <DisplayNumber currentValue={data.text} />
+            {/* {setMaxTenNumberDetails((storedDetailArray) =>
+              storedDetailArray.concat(data.text)
+            )} */}
+            <div>
+              {/* {maxTenNumberDetails.map((item) => {
+                <div>{item.text}</div>;
+              })} */}
+            </div>
           </div>
         )}
       </div>
-      Test react query div
       <ReactQueryDevtools initialIsOpen={false} />
     </div>
   );

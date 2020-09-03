@@ -20,18 +20,24 @@ function DisplayButtons(props) {
         <h2 className="ui header">Header</h2>
         {props.counter}
         <button
+          className="ui button"
           onClick={() => {
             setPlayPauseMode((m) => !m);
           }}
         >
           Play/ Pause
         </button>
-        <button onClick={() => setDirection("Increment")}> + </button>
-        <button onClick={() => setDirection("Decrement")}> - </button>
+        <button className="ui button" onClick={() => setDirection("Increment")}>
+          +
+        </button>
+        <button className="ui button" onClick={() => setDirection("Decrement")}>
+          -
+        </button>
         {direction}
         {console.log(playPauseMode)}
       </div>
       <CounterDelaySimulator
+        style={{ marginTop: "100px" }}
         playPauseMode={playPauseMode}
         direction={direction}
       />
@@ -56,10 +62,10 @@ function CounterDelaySimulator(props) {
   }
 
   return (
-    <>
-      <DisplayNumber currentValue={counter} />
-      <div>{counter}</div>
+    <div className="ui text container">
+      {/* <DisplayNumber currentValue={counter} /> */}
       <button
+        className="ui button"
         onClick={() => {
           setDelay(500);
         }}
@@ -67,6 +73,7 @@ function CounterDelaySimulator(props) {
         1/2 second
       </button>
       <button
+        className="ui button"
         onClick={() => {
           setDelay(1000);
         }}
@@ -74,6 +81,7 @@ function CounterDelaySimulator(props) {
         1 second
       </button>
       <button
+        className="ui button"
         onClick={() => {
           setDelay(2000);
         }}
@@ -81,6 +89,7 @@ function CounterDelaySimulator(props) {
         2 second
       </button>
       <button
+        className="ui button"
         onClick={() => {
           setDelay(4000);
         }}
@@ -97,9 +106,9 @@ function CounterDelaySimulator(props) {
         setCount={setCounter}
       />
 
-      <FetchData displayNumberDetails={counter} />
+      {/* <FetchData displayNumberDetails={counter} /> */}
       <ReactQueryComponent number={counter} />
-    </>
+    </div>
   );
 }
 
@@ -107,9 +116,10 @@ function ManualDisplayComponent(props) {
   let classButton = "";
   return (
     <>
-      <div>test Div manual control {props.count}</div>
+      {/* <div>test Div manual control {props.count}</div> */}
       <button
-        className={props.playPauseMode ? "disabled" : ""}
+        className="ui button"
+        disabled={props.playPauseMode === true}
         onClick={() => {
           props.setCount((counter) => counter + 1);
         }}
@@ -117,8 +127,15 @@ function ManualDisplayComponent(props) {
         +
       </button>
       <button
-        className={props.playPauseMode ? "disabled" : ""}
-        onClick={() => props.setCount((counter) => counter + 1)}
+        className="ui button"
+        disabled={props.playPauseMode === true}
+        onClick={() =>
+          props.count > 0 ? (
+            props.setCount((counter) => counter - 1)
+          ) : (
+            <div>can't go less then zero </div>
+          )
+        }
       >
         -
       </button>
