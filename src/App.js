@@ -8,8 +8,6 @@ import FetchData from "../src/apis/FetchData";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [manualActive, changedManualActive] = useState(true);
   // const [direction, setDirection] = useState("increment");
 
   const ICREMENT_SYMBOL = "+";
@@ -18,14 +16,7 @@ function App() {
 
   return (
     <div>
-      <AutomaticDisplayComponent
-        currentCount={count}
-        setCount={setCount}
-        currentManualActiveValue={manualActive}
-        togglefunctionality={() => {
-          changedManualActive((m) => !m);
-        }}
-      />
+      <AutomaticDisplayComponent />
     </div>
   );
 }

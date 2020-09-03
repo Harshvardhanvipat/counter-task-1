@@ -45,8 +45,8 @@ function CounterDelaySimulator(props) {
   useInterval(() => {
     if (props.playPauseMode) {
       props.direction === "Increment"
-        ? setCounter(() => counter + 1)
-        : setCounter(counter - 1);
+        ? setCounter((value) => value + 1)
+        : setCounter((value) => value - 1);
     }
   }, delay);
 
@@ -56,6 +56,7 @@ function CounterDelaySimulator(props) {
 
   return (
     <>
+      <DisplayNumber currentValue={counter} />
       <div>{counter}</div>
       <button
         onClick={() => {
@@ -101,11 +102,24 @@ function CounterDelaySimulator(props) {
 }
 
 function ManualDisplayComponent(props) {
+  let classButton = "";
   return (
     <>
       <div>test Div manual control {props.count}</div>
-      <button onClick={props.setCounter}>+</button>
-      <button onClick={props.setCounter}>-</button>
+      <button
+        className={props.playPauseMode ? "disabled" : ""}
+        onClick={() => {
+          props.setCount((counter) => counter + 1);
+        }}
+      >
+        +
+      </button>
+      <button
+        className={props.playPauseMode ? "disabled" : ""}
+        onClick={() => props.setCount((counter) => counter + 1)}
+      >
+        -
+      </button>
     </>
   );
 }

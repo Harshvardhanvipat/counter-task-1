@@ -9,12 +9,9 @@ export default function FetchData(props) {
 
   useEffect(() => {
     const fetchedData = async () => {
-      const resp = await axios
-        .get(URL)
+      const resp = await getNumberInfo(number)
         .then((resp) => {
-          setDataFetched((storedDetailArray) =>
-            storedDetailArray.concat(resp.data)
-          );
+          setDataFetched((storedDetailArray) => storedDetailArray.concat(resp));
           // why do we need a return here ??
         })
         .catch((err) => {
@@ -56,26 +53,46 @@ export default function FetchData(props) {
 // fetch data here
 // display the current number
 
+function wait(timeInMs) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeInMs);
+  });
+}
+
+async function getNumberInfo(number) {
+  const URL = `http://numbersapi.com/${number}/math`;
+  const res = await axios.get(URL);
+  const randomDelay = parseInt(Math.random() * 1000, 10);
+  console.log(randomDelay + "ms");
+  await wait(randomDelay);
+  return res.data;
+}
+
 function NumberComponent(props) {
-  const URL = `http://numbersapi.com/${props.number}/math`;
   const [individualNumberDetail, setIndividualNumberDetail] = useState(
     "Loading"
   );
 
   useEffect(() => {
+    let apiRequestCancel = false;
+
     const fetchedData = async () => {
-      const resp = await axios
-        .get(URL)
+      const resp = getNumberInfo(props.number)
         .then((resp) => {
+          if (apiRequestCancel) return;
           setIndividualNumberDetail((storeIndividualNumber) => {
             return (storeIndividualNumber = resp.data);
           });
         })
         .catch((err) => {
+          if (apiRequestCancel) return;
           console.log(err);
         });
     };
     fetchedData();
+    return () => {
+      apiRequestCancel = true;
+    };
   }, [props.number]);
 
   return (
