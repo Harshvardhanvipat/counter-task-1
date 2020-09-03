@@ -3,6 +3,7 @@ import { Dropdown } from "semantic-ui-react";
 import "../css/AutomaticDisplayComponent.css";
 import DisplayNumber from "./DisplayNumberComponent";
 import FetchData from "../apis/FetchData";
+import ReactQueryComponent from "./ReactQueryComponent";
 
 function AutomaticDisplayComponent(props) {
   return <DisplayButtons />;
@@ -97,6 +98,7 @@ function CounterDelaySimulator(props) {
       />
 
       <FetchData displayNumberDetails={counter} />
+      <ReactQueryComponent number={counter} />
     </>
   );
 }

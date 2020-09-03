@@ -1,9 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import DisplayNumber from "../src/components/DisplayNumberComponent";
 import AutomaticDisplayComponent from "../src/components/AutomaticDisplayComponent";
-// import FormAutomaticRender from "../src/components/FormAutomaticRender";
-import FetchData from "../src/apis/FetchData";
 
 import "./App.css";
 
